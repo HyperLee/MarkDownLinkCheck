@@ -120,6 +120,7 @@
 **連結解析**
 
 - **FR-011**: 系統 MUST 解析 Markdown 中使用 `[text](url)` 語法的連結
+- **FR-011a**: 系統 MUST 解析 Markdown 中使用 reference-style 語法的連結（如 `[text][ref]` 搭配 `[ref]: url` 定義），與 inline 連結同等處理
 - **FR-012**: 系統 MUST 解析 Markdown 中使用 `<url>` 語法的自動連結
 - **FR-013**: 系統 MUST 解析 Markdown 中的圖片連結 `![alt](url)`
 - **FR-014**: 系統 MUST 忽略 fenced code block（` ``` `）內的所有連結
@@ -131,8 +132,11 @@
 **連結驗證**
 
 - **FR-019**: 系統 MUST 對外部 URL（HTTP/HTTPS）發送 HTTP HEAD 請求驗證有效性
+- **FR-019a**: 系統 MUST NOT 驗證外部 URL 的片段識別符（fragment / anchor），僅檢查 HTTP 回應狀態
 - **FR-020**: 當 HEAD 請求被拒絕（HTTP 405）時，系統 MUST 改用 GET 請求重試
 - **FR-021**: 系統 MUST 對 HTTP 2xx 回應標記為 ✅ Healthy
+- **FR-021a**: 系統 MUST 對經 HTTP 301 永久重導向後最終到達 2xx 的連結標記為 ⚠️ Warning，並在報告中顯示重導向後的新 URL，提示使用者更新連結
+- **FR-021b**: 系統 MUST 對經 HTTP 302 暫時重導向後最終到達 2xx 的連結標記為 ✅ Healthy
 - **FR-022**: 系統 MUST 對 HTTP 4xx/5xx 回應標記為 ❌ Broken
 - **FR-023**: 系統 MUST 對逾時（超過 10 秒）、過多重導向（超過 5 次）、HTTP 429 回應標記為 ⚠️ Warning
 - **FR-024**: 系統 MUST 對 Repo 內相對路徑連結，透過確認檔案是否存在來驗證
@@ -158,8 +162,8 @@
 
 **使用者體驗**
 
-- **FR-038**: 系統 MUST 在檢測過程中即時顯示進度「已檢查 N / 共 M 個連結」
-- **FR-039**: 系統 MUST 每完成一個檔案的檢查即時串流該檔案的結果，不需等全部完成
+- **FR-038**: 系統 MUST 在檢測過程中透過 Server-Sent Events (SSE) 即時推送進度「已檢查 N / 共 M 個連結」
+- **FR-039**: 系統 MUST 每完成一個檔案的檢查即透過 SSE 串流該檔案的結果，不需等全部完成
 - **FR-040**: 系統 MUST 在報告完成後顯示總耗時
 - **FR-041**: 系統 MUST 在報告中將 Broken 排最前、Warning 次之、Healthy 摘要放最後
 - **FR-042**: 系統 MUST 提供「複製為 Markdown」按鈕，將報告以 Markdown 格式複製到剪貼簿
@@ -186,7 +190,19 @@
 - **SC-007**: 系統在面對大量相同網域連結時不觸發目標站點的速率限制封鎖
 - **SC-008**: 錨點拼字建議功能在編輯距離 ≤ 2 的情況下能正確提示替代錨點
 
+## Clarifications
+
+### Session 2026-02-23
+
+- Q: 系統是否應該解析 reference-style Markdown 連結（如 `[text][ref]` 搭配 `[ref]: url`）？ → A: 是，支援 reference-style 連結，與 inline 連結同等處理
+- Q: 即時串流機制應採用哪種技術？ → A: 採用 Server-Sent Events (SSE)，單向推送、輕量且瀏覽器原生支援
+- Q: 對於外部 URL 的片段識別符（fragment），是否應驗證外部頁面錨點存在性？ → A: 不檢查，僅驗證 HTTP 回應狀態
+- Q: UI 的主要語言方向？ → A: 中文為主，狀態標籤（Healthy/Broken/Warning/Skipped）保留英文
+- Q: HTTP 301 永久重導向後成功到達目的地，應標記為 Healthy 還是 Warning？ → A: 301=Warning 並顯示新 URL；302=Healthy
+
 ## Assumptions
+
+- UI 語言以中文為主，狀態標籤（Healthy / Broken / Warning / Skipped）保留英文以利在報告貼入 GitHub Issue/PR 時保持讀性
 
 - 本 MVP 階段僅支援 GitHub 平台的公開 Repository，不支援 GitLab、Bitbucket 等其他平台
 - 歷史報告查詢功能不在本 MVP 範圍內
