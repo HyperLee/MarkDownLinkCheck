@@ -208,10 +208,10 @@ function handleSSE(event) {
             updateProgress(event.data);
             break;
         case 'file-result':
-            displayFileResult(event.data);
+            displayFileResult(event.data.fileResult);
             break;
         case 'complete':
-            displayReport(event.data);
+            displayReport(event.data.report);
             break;
         case 'error':
             showError(event.data.errorMessage);
@@ -294,7 +294,7 @@ function displayReport(report) {
     document.getElementById('summaryBroken').textContent = report.brokenCount;
     document.getElementById('summaryWarning').textContent = report.warningCount;
     document.getElementById('summarySkipped').textContent = report.skippedCount;
-    document.getElementById('summaryDuration').textContent = formatDuration(report.totalDurationMs);
+    document.getElementById('summaryDuration').textContent = formatDuration(report.totalDuration);
 
     document.getElementById('reportSummary').style.display = 'block';
 }
@@ -311,7 +311,7 @@ function generateMarkdownReport(report) {
     markdown += `| ❌ 失效連結 | ${report.brokenCount} |\n`;
     markdown += `| ⚠️ 警告 | ${report.warningCount} |\n`;
     markdown += `| ⏭️ 跳過 | ${report.skippedCount} |\n`;
-    markdown += `| 總耗時 | ${formatDuration(report.totalDurationMs)} |\n\n`;
+    markdown += `| 總耗時 | ${formatDuration(report.totalDuration)} |\n\n`;
 
     if (report.fileResults && report.fileResults.length > 0) {
         markdown += `## 詳細結果\n\n`;
@@ -355,9 +355,26 @@ function getStatusClass(status) {
     }
 }
 
-function formatDuration(ms) {
-    if (ms < 1000) return `${ms}ms`;
-    return `${(ms / 1000).toFixed(1)}s`;
+function formatDuration(duration) {
+    if (typeof duration === 'string') {
+        // Parse TimeSpan string format "HH:mm:ss.fffffff" or "mm:ss.fffffff"
+        const parts = duration.split(':');
+        let totalSeconds = 0;
+        if (parts.length === 3) {
+            totalSeconds = parseInt(parts[0]) * 3600 + parseInt(parts[1]) * 60 + parseFloat(parts[2]);
+        } else if (parts.length === 2) {
+            totalSeconds = parseInt(parts[0]) * 60 + parseFloat(parts[1]);
+        } else {
+            totalSeconds = parseFloat(duration) || 0;
+        }
+        if (totalSeconds < 1) return `${Math.round(totalSeconds * 1000)}ms`;
+        return `${totalSeconds.toFixed(1)}s`;
+    }
+    if (typeof duration === 'number') {
+        if (duration < 1000) return `${duration}ms`;
+        return `${(duration / 1000).toFixed(1)}s`;
+    }
+    return '0ms';
 }
 
 function escapeHtml(unsafe) {

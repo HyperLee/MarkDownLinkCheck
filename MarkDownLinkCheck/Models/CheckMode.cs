@@ -1,8 +1,11 @@
+﻿using System.Text.Json.Serialization;
+
 namespace MarkDownLinkCheck.Models;
 
 /// <summary>
 /// Represents the mode of link checking operation.
 /// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
 public enum CheckMode
 {
     /// <summary>
