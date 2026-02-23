@@ -1,2 +1,4 @@
 <Solution>
+  <Project Path="MarkDownLinkCheck.Tests/MarkDownLinkCheck.Tests.csproj" />
+  <Project Path="MarkDownLinkCheck/MarkDownLinkCheck.csproj" />
 </Solution>

@@ -21,6 +21,124 @@ body {
   margin-bottom: 60px;
 }
 
+/* Report Display Styles */
+.stat-card {
+  border: 1px solid #dee2e6;
+}
+
+.stat-label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.stat-value {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.card-header h6 {
+  margin-bottom: 0;
+}
+
+.badge {
+  margin-left: 0.5rem;
+}
+
+/* Status Icons in Tables */
+.table td {
+  vertical-align: middle;
+}
+
+.table code {
+  word-break: break-all;
+}
+
+/* Progress Bar Animation */
+.progress {
+  height: 2rem;
+}
+
+.progress-bar {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+/* Error Message Styling */
+#errorMessage {
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* File Result Cards */
+.border-danger {
+  border-width: 3px !important;
+}
+
+.border-warning {
+  border-width: 3px !important;
+}
+
+.border-success {
+  border-width: 2px !important;
+}
+
+/* Character Counter */
+#charCount {
+  font-weight: 600;
+}
+
+/* Toast Notification */
+.position-fixed {
+  animation: fadeInUp 0.3s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive Table */
+@media (max-width: 768px) {
+  .table {
+    font-size: 0.875rem;
+  }
+  
+  .stat-value {
+    font-size: 1.5rem;
+  }
+}
+
+/* Button Hover Effects */
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(37, 140, 251, 0.3);
+  transition: all 0.2s;
+}
+
+.btn-danger:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(220, 53, 69, 0.3);
+  transition: all 0.2s;
+}
+
+
 .form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
   color: var(--bs-secondary-color);
   text-align: end;

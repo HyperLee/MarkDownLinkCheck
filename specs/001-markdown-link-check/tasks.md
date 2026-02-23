@@ -19,10 +19,10 @@
 
 **Purpose**: 專案初始化與基本結構建立
 
-- [ ] T001 Create project directories (Models/, Services/, Endpoints/) in MarkDownLinkCheck/
-- [ ] T002 Add NuGet packages (Markdig, Serilog.AspNetCore, Serilog.Sinks.Console, Serilog.Sinks.File) to MarkDownLinkCheck/MarkDownLinkCheck.csproj
-- [ ] T003 [P] Create test project with xUnit, Moq, Microsoft.AspNetCore.Mvc.Testing in MarkDownLinkCheck.Tests/MarkDownLinkCheck.Tests.csproj and add to MarkDownLinkCheck.slnx
-- [ ] T004 [P] Configure LinkCheck options section and Serilog settings in MarkDownLinkCheck/appsettings.json and MarkDownLinkCheck/appsettings.Development.json
+- [X] T001 Create project directories (Models/, Services/, Endpoints/) in MarkDownLinkCheck/
+- [X] T002 Add NuGet packages (Markdig, Serilog.AspNetCore, Serilog.Sinks.Console, Serilog.Sinks.File) to MarkDownLinkCheck/MarkDownLinkCheck.csproj
+- [X] T003 [P] Create test project with xUnit, Moq, Microsoft.AspNetCore.Mvc.Testing in MarkDownLinkCheck.Tests/MarkDownLinkCheck.Tests.csproj and add to MarkDownLinkCheck.slnx
+- [X] T004 [P] Configure LinkCheck options section and Serilog settings in MarkDownLinkCheck/appsettings.json and MarkDownLinkCheck/appsettings.Development.json
 
 ---
 
@@ -32,18 +32,18 @@
 
 **⚠️ CRITICAL**: 所有 User Story 的工作必須等此階段完成後才能開始
 
-- [ ] T005 [P] Create LinkType enum (ExternalUrl, RelativePath, Anchor, Email, Image) in MarkDownLinkCheck/Models/LinkType.cs
-- [ ] T006 [P] Create LinkStatus enum (Healthy, Broken, Warning, Skipped) in MarkDownLinkCheck/Models/LinkStatus.cs
-- [ ] T007 [P] Create CheckMode enum (MarkdownSource, RepoUrl) in MarkDownLinkCheck/Models/CheckMode.cs
-- [ ] T008 [P] Create Link model (Type, RawText, TargetUrl, LineNumber, SourceFile) per data-model.md in MarkDownLinkCheck/Models/Link.cs
-- [ ] T009 [P] Create MarkdownFile model (FileName, RelativePath, Content, Links) per data-model.md in MarkDownLinkCheck/Models/MarkdownFile.cs
-- [ ] T010 [P] Create LinkResult model (Link, Status, HttpStatusCode, ErrorType, ErrorMessage, RedirectUrl, AnchorSuggestion, Duration) per data-model.md in MarkDownLinkCheck/Models/LinkResult.cs
-- [ ] T011 [P] Create CheckRequest model with conditional validation (Mode, MarkdownContent, RepoUrl, Branch, RequestedAt, SourceIp) per data-model.md in MarkDownLinkCheck/Models/CheckRequest.cs
-- [ ] T012 [P] Create CheckReport and FileCheckResult models (FileCount, TotalLinkCount, status counts, TotalDuration, FileResults) per data-model.md in MarkDownLinkCheck/Models/CheckReport.cs
-- [ ] T013 [P] Create CheckProgress SSE event model (EventType, CheckedCount, TotalCount, CurrentFile, FileResult, Report, ErrorMessage) per data-model.md in MarkDownLinkCheck/Models/CheckProgress.cs
-- [ ] T014 [P] Create LinkCheckOptions configuration model (MaxMarkdownLength, MaxFilesPerRepo, MaxLinksPerFile, MaxLinksPerCheck, HttpTimeoutSeconds, MaxRedirects, MaxRetries, GlobalConcurrency, PerDomainConcurrency, UserAgent) in MarkDownLinkCheck/Models/LinkCheckOptions.cs
-- [ ] T015 [P] Create service interfaces per data-model.md: IMarkdownParserService.cs, ILinkValidatorService.cs, IGitHubRepoService.cs, ILinkCheckOrchestrator.cs, IAnchorSuggestionService.cs, IReportGeneratorService.cs in MarkDownLinkCheck/Services/
-- [ ] T016 Configure Program.cs with Serilog bootstrap, LinkCheckOptions binding, IHttpClientFactory (Named "LinkChecker" with SocketsHttpHandler), Anti-Forgery, service DI, and SSE endpoint routing in MarkDownLinkCheck/Program.cs
+- [X] T005 [P] Create LinkType enum (ExternalUrl, RelativePath, Anchor, Email, Image) in MarkDownLinkCheck/Models/LinkType.cs
+- [X] T006 [P] Create LinkStatus enum (Healthy, Broken, Warning, Skipped) in MarkDownLinkCheck/Models/LinkStatus.cs
+- [X] T007 [P] Create CheckMode enum (MarkdownSource, RepoUrl) in MarkDownLinkCheck/Models/CheckMode.cs
+- [X] T008 [P] Create Link model (Type, RawText, TargetUrl, LineNumber, SourceFile) per data-model.md in MarkDownLinkCheck/Models/Link.cs
+- [X] T009 [P] Create MarkdownFile model (FileName, RelativePath, Content, Links) per data-model.md in MarkDownLinkCheck/Models/MarkdownFile.cs
+- [X] T010 [P] Create LinkResult model (Link, Status, HttpStatusCode, ErrorType, ErrorMessage, RedirectUrl, AnchorSuggestion, Duration) per data-model.md in MarkDownLinkCheck/Models/LinkResult.cs
+- [X] T011 [P] Create CheckRequest model with conditional validation (Mode, MarkdownContent, RepoUrl, Branch, RequestedAt, SourceIp) per data-model.md in MarkDownLinkCheck/Models/CheckRequest.cs
+- [X] T012 [P] Create CheckReport and FileCheckResult models (FileCount, TotalLinkCount, status counts, TotalDuration, FileResults) per data-model.md in MarkDownLinkCheck/Models/CheckReport.cs
+- [X] T013 [P] Create CheckProgress SSE event model (EventType, CheckedCount, TotalCount, CurrentFile, FileResult, Report, ErrorMessage) per data-model.md in MarkDownLinkCheck/Models/CheckProgress.cs
+- [X] T014 [P] Create LinkCheckOptions configuration model (MaxMarkdownLength, MaxFilesPerRepo, MaxLinksPerFile, MaxLinksPerCheck, HttpTimeoutSeconds, MaxRedirects, MaxRetries, GlobalConcurrency, PerDomainConcurrency, UserAgent) in MarkDownLinkCheck/Models/LinkCheckOptions.cs
+- [X] T015 [P] Create service interfaces per data-model.md: IMarkdownParserService.cs, ILinkValidatorService.cs, IGitHubRepoService.cs, ILinkCheckOrchestrator.cs, IAnchorSuggestionService.cs, IReportGeneratorService.cs in MarkDownLinkCheck/Services/
+- [X] T016 Configure Program.cs with Serilog bootstrap, LinkCheckOptions binding, IHttpClientFactory (Named "LinkChecker" with SocketsHttpHandler), Anti-Forgery, service DI, and SSE endpoint routing in MarkDownLinkCheck/Program.cs
 
 **Checkpoint**: 基礎建設就緒 — User Story 實作可以開始
 
@@ -59,26 +59,26 @@
 
 > **NOTE**: 先撰寫測試並確認 FAIL，再實作功能
 
-- [ ] T017 [P] [US1] Write unit tests for MarkdownParserService (inline link, reference-style, auto-link, image link, code block exclusion, HTML comment exclusion, anchor extraction, 1000 link limit) in MarkDownLinkCheck.Tests/Unit/Services/MarkdownParserServiceTests.cs
-- [ ] T018 [P] [US1] Write unit tests for AnchorSuggestionService (exact match, Levenshtein distance ≤ 2, no suggestion when distance > 2) in MarkDownLinkCheck.Tests/Unit/Services/AnchorSuggestionServiceTests.cs
-- [ ] T019 [P] [US1] Write unit tests for LinkValidatorService (HTTP 2xx=Healthy, 4xx/5xx=Broken, 301=Warning with RedirectUrl, 302=Healthy, 429=Warning, timeout=Warning, HEAD 405 fallback to GET, anchor validation, email format, skip relative path in Markdown mode, SSRF blocked) in MarkDownLinkCheck.Tests/Unit/Services/LinkValidatorServiceTests.cs
-- [ ] T020 [P] [US1] Write unit tests for ReportGeneratorService (status counts, file grouping, Broken-first sorting) in MarkDownLinkCheck.Tests/Unit/Services/ReportGeneratorServiceTests.cs
-- [ ] T021 [P] [US1] Write unit tests for LinkCheckOrchestrator (MarkdownSource mode, progress events, URL deduplication, 5000 link limit, 100000 char limit) in MarkDownLinkCheck.Tests/Unit/Services/LinkCheckOrchestratorTests.cs
-- [ ] T022 [P] [US1] Write unit tests for Link model (type determination logic: mailto→Email, #→Anchor, http→ExternalUrl, else→RelativePath, image detection) in MarkDownLinkCheck.Tests/Unit/Models/LinkTests.cs
+- [X] T017 [P] [US1] Write unit tests for MarkdownParserService (inline link, reference-style, auto-link, image link, code block exclusion, HTML comment exclusion, anchor extraction, 1000 link limit) in MarkDownLinkCheck.Tests/Unit/Services/MarkdownParserServiceTests.cs
+- [X] T018 [P] [US1] Write unit tests for AnchorSuggestionService (exact match, Levenshtein distance ≤ 2, no suggestion when distance > 2) in MarkDownLinkCheck.Tests/Unit/Services/AnchorSuggestionServiceTests.cs
+- [X] T019 [P] [US1] Write unit tests for LinkValidatorService (HTTP 2xx=Healthy, 4xx/5xx=Broken, 301=Warning with RedirectUrl, 302=Healthy, 429=Warning, timeout=Warning, HEAD 405 fallback to GET, anchor validation, email format, skip relative path in Markdown mode, SSRF blocked) in MarkDownLinkCheck.Tests/Unit/Services/LinkValidatorServiceTests.cs
+- [X] T020 [P] [US1] Write unit tests for ReportGeneratorService (status counts, file grouping, Broken-first sorting) in MarkDownLinkCheck.Tests/Unit/Services/ReportGeneratorServiceTests.cs
+- [X] T021 [P] [US1] Write unit tests for LinkCheckOrchestrator (MarkdownSource mode, progress events, URL deduplication, 5000 link limit, 100000 char limit) in MarkDownLinkCheck.Tests/Unit/Services/LinkCheckOrchestratorTests.cs
+- [X] T022 [P] [US1] Write unit tests for Link model (type determination logic: mailto→Email, #→Anchor, http→ExternalUrl, else→RelativePath, image detection) in MarkDownLinkCheck.Tests/Unit/Models/LinkTests.cs
 
 ### Implementation for User Story 1
 
-- [ ] T023 [P] [US1] Implement MarkdownParserService using Markdig AST traversal (ParseLinks: LinkInline + AutolinkInline extraction, ExtractAnchors: HeadingBlock→GitHub-style anchor, reference-style link resolution) in MarkDownLinkCheck/Services/MarkdownParserService.cs
-- [ ] T024 [P] [US1] Implement AnchorSuggestionService (Levenshtein distance calculation, suggest when distance ≤ 2, return closest match) in MarkDownLinkCheck/Services/AnchorSuggestionService.cs
-- [ ] T025 [US1] Implement LinkValidatorService (IHttpClientFactory "LinkChecker", HEAD request with GET fallback on 405, status mapping per data-model.md, anchor validation with AnchorSuggestionService, email format check, skip relative path in Markdown mode, retry once on timeout/5xx) in MarkDownLinkCheck/Services/LinkValidatorService.cs
-- [ ] T026 [US1] Implement ReportGeneratorService (GenerateReport: aggregate FileCheckResult with status counts and duration, sort LinkResults Broken→Warning→Healthy, sort FileResults by severity) in MarkDownLinkCheck/Services/ReportGeneratorService.cs
-- [ ] T027 [US1] Implement LinkCheckOrchestrator MarkdownSource mode (create single MarkdownFile, parse links, deduplicate external URLs, validate all links, yield CheckProgress events via IAsyncEnumerable, yield file-result then complete) in MarkDownLinkCheck/Services/LinkCheckOrchestrator.cs
-- [ ] T028 [US1] Implement SSE streaming endpoint POST /api/check/sse (set text/event-stream headers, deserialize CheckRequest, call orchestrator, write SSE event format, handle cancellation, return 400 on validation error) per contracts/sse-endpoint.md in MarkDownLinkCheck/Endpoints/LinkCheckSseEndpoint.cs
-- [ ] T029 [US1] Update Index.cshtml with mode selection radio buttons (MarkdownSource/RepoUrl), Markdown textarea with 100,000 char limit, start button, progress bar area, file results container, report summary area, error message display in MarkDownLinkCheck/Pages/Index.cshtml
-- [ ] T030 [US1] Update Index.cshtml.cs PageModel (remove default handler boilerplate, page serves as static entry point) in MarkDownLinkCheck/Pages/Index.cshtml.cs
-- [ ] T031 [US1] Implement SSE client using Fetch API + ReadableStream (POST to /api/check/sse, parse SSE event format, handle progress/file-result/complete/error events, update progress bar, append file results, show errors, AbortController for cancel) in MarkDownLinkCheck/wwwroot/js/site.js
-- [ ] T032 [US1] Add report display styles (status icons ✅❌⚠️⏭️, file grouping cards, link result rows, progress bar, error message styling) in MarkDownLinkCheck/wwwroot/css/site.css
-- [ ] T033 [US1] Update shared layout with application title "Markdown Link Check", remove Privacy nav link, update footer in MarkDownLinkCheck/Pages/Shared/_Layout.cshtml
+- [X] T023 [P] [US1] Implement MarkdownParserService using Markdig AST traversal (ParseLinks: LinkInline + AutolinkInline extraction, ExtractAnchors: HeadingBlock→GitHub-style anchor, reference-style link resolution) in MarkDownLinkCheck/Services/MarkdownParserService.cs
+- [X] T024 [P] [US1] Implement AnchorSuggestionService (Levenshtein distance calculation, suggest when distance ≤ 2, return closest match) in MarkDownLinkCheck/Services/AnchorSuggestionService.cs
+- [X] T025 [US1] Implement LinkValidatorService (IHttpClientFactory "LinkChecker", HEAD request with GET fallback on 405, status mapping per data-model.md, anchor validation with AnchorSuggestionService, email format check, skip relative path in Markdown mode, retry once on timeout/5xx) in MarkDownLinkCheck/Services/LinkValidatorService.cs
+- [X] T026 [US1] Implement ReportGeneratorService (GenerateReport: aggregate FileCheckResult with status counts and duration, sort LinkResults Broken→Warning→Healthy, sort FileResults by severity) in MarkDownLinkCheck/Services/ReportGeneratorService.cs
+- [X] T027 [US1] Implement LinkCheckOrchestrator MarkdownSource mode (create single MarkdownFile, parse links, deduplicate external URLs, validate all links, yield CheckProgress events via IAsyncEnumerable, yield file-result then complete) in MarkDownLinkCheck/Services/LinkCheckOrchestrator.cs
+- [X] T028 [US1] Implement SSE streaming endpoint POST /api/check/sse (set text/event-stream headers, deserialize CheckRequest, call orchestrator, write SSE event format, handle cancellation, return 400 on validation error) per contracts/sse-endpoint.md in MarkDownLinkCheck/Endpoints/LinkCheckSseEndpoint.cs
+- [X] T029 [US1] Update Index.cshtml with mode selection radio buttons (MarkdownSource/RepoUrl), Markdown textarea with 100,000 char limit, start button, progress bar area, file results container, report summary area, error message display in MarkDownLinkCheck/Pages/Index.cshtml
+- [X] T030 [US1] Update Index.cshtml.cs PageModel (remove default handler boilerplate, page serves as static entry point) in MarkDownLinkCheck/Pages/Index.cshtml.cs
+- [X] T031 [US1] Implement SSE client using Fetch API + ReadableStream (POST to /api/check/sse, parse SSE event format, handle progress/file-result/complete/error events, update progress bar, append file results, show errors, AbortController for cancel) in MarkDownLinkCheck/wwwroot/js/site.js
+- [X] T032 [US1] Add report display styles (status icons ✅❌⚠️⏭️, file grouping cards, link result rows, progress bar, error message styling) in MarkDownLinkCheck/wwwroot/css/site.css
+- [X] T033 [US1] Update shared layout with application title "Markdown Link Check", remove Privacy nav link, update footer in MarkDownLinkCheck/Pages/Shared/_Layout.cshtml
 
 **Checkpoint**: User Story 1 完整可用 — 使用者可貼上 Markdown 文字即時檢測所有連結
 
@@ -92,16 +92,16 @@
 
 ### Tests for User Story 2 ⚠️
 
-- [ ] T034 [P] [US2] Write unit tests for GitHubRepoService (ValidateRepoUrlAsync: valid/invalid URL/private repo, GetDefaultBranchAsync, ListMarkdownFilesAsync: 500 file limit, GetFileContentAsync) with mocked IHttpClientFactory in MarkDownLinkCheck.Tests/Unit/Services/GitHubRepoServiceTests.cs
+- [X] T034 [P] [US2] Write unit tests for GitHubRepoService (ValidateRepoUrlAsync: valid/invalid URL/private repo, GetDefaultBranchAsync, ListMarkdownFilesAsync: 500 file limit, GetFileContentAsync) with mocked IHttpClientFactory in MarkDownLinkCheck.Tests/Unit/Services/GitHubRepoServiceTests.cs
 
 ### Implementation for User Story 2
 
-- [ ] T035 [US2] Implement GitHubRepoService (GitHub REST API v3, validate repo URL regex, get default branch, recursively list .md files via git tree API, get file content via raw content API, handle 404 for private repos, handle rate limit 403) in MarkDownLinkCheck/Services/GitHubRepoService.cs
-- [ ] T036 [US2] Extend LinkCheckOrchestrator with RepoUrl mode (call GitHubRepoService to list and fetch .md files, build repoFiles set and anchorsMap for relative path/anchor validation, yield progress per file, enforce 500 file limit and 5000 link limit) in MarkDownLinkCheck/Services/LinkCheckOrchestrator.cs
-- [ ] T037 [US2] Extend LinkValidatorService for relative path validation in repo context (check file existence in repoFiles set, cross-file anchor validation using anchorsMap, anchor suggestion for cross-file anchors) in MarkDownLinkCheck/Services/LinkValidatorService.cs
-- [ ] T038 [US2] Add RepoUrl mode UI (URL input field with pattern validation, optional branch name input, mode toggle show/hide, validation error messages) to MarkDownLinkCheck/Pages/Index.cshtml
-- [ ] T039 [US2] Add RepoUrl mode handling in SSE client (send repoUrl and branch in payload, display "scanning... found N files", multi-file result display with file path headers) in MarkDownLinkCheck/wwwroot/js/site.js
-- [ ] T040 [US2] Update orchestrator unit tests for RepoUrl mode (multi-file scanning, relative path context, cross-file anchor, file limit, rate limit error) in MarkDownLinkCheck.Tests/Unit/Services/LinkCheckOrchestratorTests.cs
+- [X] T035 [US2] Implement GitHubRepoService (GitHub REST API v3, validate repo URL regex, get default branch, recursively list .md files via git tree API, get file content via raw content API, handle 404 for private repos, handle rate limit 403) in MarkDownLinkCheck/Services/GitHubRepoService.cs
+- [X] T036 [US2] Extend LinkCheckOrchestrator with RepoUrl mode (call GitHubRepoService to list and fetch .md files, build repoFiles set and anchorsMap for relative path/anchor validation, yield progress per file, enforce 500 file limit and 5000 link limit) in MarkDownLinkCheck/Services/LinkCheckOrchestrator.cs
+- [X] T037 [US2] Extend LinkValidatorService for relative path validation in repo context (check file existence in repoFiles set, cross-file anchor validation using anchorsMap, anchor suggestion for cross-file anchors) in MarkDownLinkCheck/Services/LinkValidatorService.cs
+- [X] T038 [US2] Add RepoUrl mode UI (URL input field with pattern validation, optional branch name input, mode toggle show/hide, validation error messages) to MarkDownLinkCheck/Pages/Index.cshtml
+- [X] T039 [US2] Add RepoUrl mode handling in SSE client (send repoUrl and branch in payload, display "scanning... found N files", multi-file result display with file path headers) in MarkDownLinkCheck/wwwroot/js/site.js
+- [X] T040 [US2] Update orchestrator unit tests for RepoUrl mode (multi-file scanning, relative path context, cross-file anchor, file limit, rate limit error) in MarkDownLinkCheck.Tests/Unit/Services/LinkCheckOrchestratorTests.cs
 
 **Checkpoint**: User Story 1 與 2 皆可獨立運作 — 支援 Markdown 原始碼與 GitHub Repo URL 兩種模式
 
@@ -117,15 +117,15 @@
 
 > **NOTE**: 先撰寫測試並確認 FAIL，再實作功能
 
-- [ ] T041a [P] [US3] Write unit tests for ReportGeneratorService.GenerateMarkdownReport (Markdown table output format, status emoji mapping ✅❌⚠️⏭️, file headers, target URL, line number, error message with anchor suggestion "did you mean #xxx?", summary statistics, total duration formatting) in MarkDownLinkCheck.Tests/Unit/Services/ReportGeneratorServiceTests.cs
+- [X] T041a [P] [US3] Write unit tests for ReportGeneratorService.GenerateMarkdownReport (Markdown table output format, status emoji mapping ✅❌⚠️⏭️, file headers, target URL, line number, error message with anchor suggestion "did you mean #xxx?", summary statistics, total duration formatting) in MarkDownLinkCheck.Tests/Unit/Services/ReportGeneratorServiceTests.cs
 
 ### Implementation for User Story 3
 
-- [ ] T041 [US3] Implement GenerateMarkdownReport in ReportGeneratorService (output Markdown table format: file headers, status emoji, target URL, line number, error message, anchor suggestion, summary statistics, total duration) in MarkDownLinkCheck/Services/ReportGeneratorService.cs
-- [ ] T042 [US3] Enhance report rendering with detailed link info (HTTP status code, error type, redirect URL, anchor suggestion "did you mean #xxx?", line number display) in MarkDownLinkCheck/wwwroot/js/site.js
-- [ ] T043 [US3] Implement "Copy as Markdown" button (call GenerateMarkdownReport via hidden field or client-side generation, Clipboard API writeText, success/failure toast notification) in MarkDownLinkCheck/wwwroot/js/site.js
-- [ ] T044 [US3] Add report summary section (scanned file count, total link count, Healthy/Broken/Warning/Skipped counts, total duration, "Copy as Markdown" button) to MarkDownLinkCheck/Pages/Index.cshtml
-- [ ] T045 [US3] Style report summary statistics (count badges with status colors), copy button, and toast notification in MarkDownLinkCheck/wwwroot/css/site.css
+- [X] T041 [US3] Implement GenerateMarkdownReport in ReportGeneratorService (output Markdown table format: file headers, status emoji, target URL, line number, error message, anchor suggestion, summary statistics, total duration) in MarkDownLinkCheck/Services/ReportGeneratorService.cs
+- [X] T042 [US3] Enhance report rendering with detailed link info (HTTP status code, error type, redirect URL, anchor suggestion "did you mean #xxx?", line number display) in MarkDownLinkCheck/wwwroot/js/site.js
+- [X] T043 [US3] Implement "Copy as Markdown" button (call GenerateMarkdownReport via hidden field or client-side generation, Clipboard API writeText, success/failure toast notification) in MarkDownLinkCheck/wwwroot/js/site.js
+- [X] T044 [US3] Add report summary section (scanned file count, total link count, Healthy/Broken/Warning/Skipped counts, total duration, "Copy as Markdown" button) to MarkDownLinkCheck/Pages/Index.cshtml
+- [X] T045 [US3] Style report summary statistics (count badges with status colors), copy button, and toast notification in MarkDownLinkCheck/wwwroot/css/site.css
 
 **Checkpoint**: 完整報告功能就緒 — 使用者可查看詳細報告並複製為 Markdown 貼到 GitHub Issue/PR
 
@@ -141,16 +141,16 @@
 
 > **NOTE**: 先撰寫測試並確認 FAIL，再實作功能
 
-- [ ] T045a [P] [US4] Write unit tests for SSRF protection (ConnectCallback blocks private IPs: 127.0.0.0/8, 10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16, ::1; allows public IPs), per-domain SemaphoreSlim concurrency (max 3 per hostname per FR-031), and IP-based rate limiting middleware (max 5/min per IP, returns HTTP 429 with retryAfter) in MarkDownLinkCheck.Tests/Unit/Services/SecurityAndRateLimitTests.cs
-- [ ] T045b [P] [US4] Write integration test for SSRF ConnectCallback using WebApplicationFactory (POST /api/check/sse with Markdown containing loopback/private-IP URLs → verify LinkResult status=Broken, errorType=ssrf_blocked) in MarkDownLinkCheck.Tests/Integration/Endpoints/LinkCheckSseEndpointTests.cs
+- [X] T045a [P] [US4] Write unit tests for SSRF protection (ConnectCallback blocks private IPs: 127.0.0.0/8, 10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16, ::1; allows public IPs), per-domain SemaphoreSlim concurrency (max 3 per hostname per FR-031), and IP-based rate limiting middleware (max 5/min per IP, returns HTTP 429 with retryAfter) in MarkDownLinkCheck.Tests/Unit/Services/SecurityAndRateLimitTests.cs
+- [X] T045b [P] [US4] Write integration test for SSRF ConnectCallback using WebApplicationFactory (POST /api/check/sse with Markdown containing loopback/private-IP URLs → verify LinkResult status=Broken, errorType=ssrf_blocked) in MarkDownLinkCheck.Tests/Integration/Endpoints/LinkCheckSseEndpointTests.cs
 
 ### Implementation for User Story 4
 
-- [ ] T046 [P] [US4] Implement SSRF protection via SocketsHttpHandler ConnectCallback (resolve DNS, check if IP is private: 127.0.0.0/8, 10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16, ::1, block and throw) in MarkDownLinkCheck/Program.cs
-- [ ] T047 [P] [US4] Implement per-domain concurrency control (ConcurrentDictionary<string, SemaphoreSlim> keyed by hostname, max 3 per domain per FR-031) in MarkDownLinkCheck/Services/LinkValidatorService.cs
-- [ ] T048 [US4] Implement global concurrency control (SemaphoreSlim max 20 per FR-032, wrap link validation calls) in MarkDownLinkCheck/Services/LinkCheckOrchestrator.cs
-- [ ] T049 [US4] Implement IP-based rate limiting middleware (track request count per source IP, max 5 per minute per FR-036, return HTTP 429 with JSON error message and retryAfter) in MarkDownLinkCheck/Program.cs
-- [ ] T050 [P] [US4] Add rate limit exceeded (HTTP 429) and SSRF error response handling with user-friendly messages in MarkDownLinkCheck/wwwroot/js/site.js
+- [X] T046 [P] [US4] Implement SSRF protection via SocketsHttpHandler ConnectCallback (resolve DNS, check if IP is private: 127.0.0.0/8, 10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16, ::1, block and throw) in MarkDownLinkCheck/Program.cs
+- [X] T047 [P] [US4] Implement per-domain concurrency control (ConcurrentDictionary<string, SemaphoreSlim> keyed by hostname, max 3 per domain per FR-031) in MarkDownLinkCheck/Services/LinkValidatorService.cs
+- [X] T048 [US4] Implement global concurrency control (SemaphoreSlim max 20 per FR-032, wrap link validation calls) in MarkDownLinkCheck/Services/LinkCheckOrchestrator.cs
+- [X] T049 [US4] Implement IP-based rate limiting middleware (track request count per source IP, max 5 per minute per FR-036, return HTTP 429 with JSON error message and retryAfter) in MarkDownLinkCheck/Program.cs
+- [X] T050 [P] [US4] Add rate limit exceeded (HTTP 429) and SSRF error response handling with user-friendly messages in MarkDownLinkCheck/wwwroot/js/site.js
 
 **Checkpoint**: 安全防護與速率控制完成 — 系統可安全穩定地對外運行
 
@@ -160,12 +160,12 @@
 
 **Purpose**: 跨 User Story 的品質改善與最終驗證
 
-- [ ] T051 [P] Write integration tests for SSE endpoint (full pipeline: POST request → SSE stream → progress/file-result/complete events, validation error 400, rate limit 429) using WebApplicationFactory in MarkDownLinkCheck.Tests/Integration/Endpoints/LinkCheckSseEndpointTests.cs
-- [ ] T052 [P] Write integration tests for Index page (page loads, form elements present, client validation) using WebApplicationFactory in MarkDownLinkCheck.Tests/Integration/Pages/IndexPageTests.cs
-- [ ] T053 [P] Update Error page with styled error display and user-friendly message in MarkDownLinkCheck/Pages/Error.cshtml
-- [ ] T054 Code cleanup, add XML doc comments to all public APIs, verify file-scoped namespaces, apply .editorconfig formatting
-- [ ] T055 Run quickstart.md validation: dotnet build, dotnet run, dotnet test, verify all tests pass
-- [ ] T055a [P] Write performance benchmark tests for SC-001 (50 links Markdown mode < 30s) and SC-002 (10 files / 200 links Repo mode < 2min) using WebApplicationFactory with mocked HTTP responses and Stopwatch assertions in MarkDownLinkCheck.Tests/Integration/Endpoints/LinkCheckSsePerformanceTests.cs
+- [X] T051 [P] Write integration tests for SSE endpoint (full pipeline: POST request → SSE stream → progress/file-result/complete events, validation error 400, rate limit 429) using WebApplicationFactory in MarkDownLinkCheck.Tests/Integration/Endpoints/LinkCheckSseEndpointTests.cs
+- [X] T052 [P] Write integration tests for Index page (page loads, form elements present, client validation) using WebApplicationFactory in MarkDownLinkCheck.Tests/Integration/Pages/IndexPageTests.cs
+- [X] T053 [P] Update Error page with styled error display and user-friendly message in MarkDownLinkCheck/Pages/Error.cshtml
+- [X] T054 Code cleanup, add XML doc comments to all public APIs, verify file-scoped namespaces, apply .editorconfig formatting
+- [X] T055 Run quickstart.md validation: dotnet build, dotnet run, dotnet test, verify all tests pass
+- [X] T055a [P] Write performance benchmark tests for SC-001 (50 links Markdown mode < 30s) and SC-002 (10 files / 200 links Repo mode < 2min) using WebApplicationFactory with mocked HTTP responses and Stopwatch assertions in MarkDownLinkCheck.Tests/Integration/Endpoints/LinkCheckSsePerformanceTests.cs
 
 ---
 
