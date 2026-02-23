@@ -113,6 +113,12 @@
 
 **Independent Test**: 觸發一次完整檢測後，驗證報告結構（檔案分組、狀態排序、行號標示、統計摘要）及「複製為 Markdown」功能的正確性
 
+### Tests for User Story 3 ⚠️
+
+> **NOTE**: 先撰寫測試並確認 FAIL，再實作功能
+
+- [ ] T041a [P] [US3] Write unit tests for ReportGeneratorService.GenerateMarkdownReport (Markdown table output format, status emoji mapping ✅❌⚠️⏭️, file headers, target URL, line number, error message with anchor suggestion "did you mean #xxx?", summary statistics, total duration formatting) in MarkDownLinkCheck.Tests/Unit/Services/ReportGeneratorServiceTests.cs
+
 ### Implementation for User Story 3
 
 - [ ] T041 [US3] Implement GenerateMarkdownReport in ReportGeneratorService (output Markdown table format: file headers, status emoji, target URL, line number, error message, anchor suggestion, summary statistics, total duration) in MarkDownLinkCheck/Services/ReportGeneratorService.cs
@@ -130,6 +136,13 @@
 **Goal**: 系統自動遵循速率控制規則，防範 SSRF 等安全風險，確保穩定運行
 
 **Independent Test**: 模擬大量連結檢測驗證並行數量限制與同網域限制生效，確認私有 IP 位址被拒絕，驗證同一 IP 超過 5 次/分鐘被限制
+
+### Tests for User Story 4 ⚠️
+
+> **NOTE**: 先撰寫測試並確認 FAIL，再實作功能
+
+- [ ] T045a [P] [US4] Write unit tests for SSRF protection (ConnectCallback blocks private IPs: 127.0.0.0/8, 10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16, ::1; allows public IPs), per-domain SemaphoreSlim concurrency (max 3 per hostname per FR-031), and IP-based rate limiting middleware (max 5/min per IP, returns HTTP 429 with retryAfter) in MarkDownLinkCheck.Tests/Unit/Services/SecurityAndRateLimitTests.cs
+- [ ] T045b [P] [US4] Write integration test for SSRF ConnectCallback using WebApplicationFactory (POST /api/check/sse with Markdown containing loopback/private-IP URLs → verify LinkResult status=Broken, errorType=ssrf_blocked) in MarkDownLinkCheck.Tests/Integration/Endpoints/LinkCheckSseEndpointTests.cs
 
 ### Implementation for User Story 4
 
@@ -152,6 +165,7 @@
 - [ ] T053 [P] Update Error page with styled error display and user-friendly message in MarkDownLinkCheck/Pages/Error.cshtml
 - [ ] T054 Code cleanup, add XML doc comments to all public APIs, verify file-scoped namespaces, apply .editorconfig formatting
 - [ ] T055 Run quickstart.md validation: dotnet build, dotnet run, dotnet test, verify all tests pass
+- [ ] T055a [P] Write performance benchmark tests for SC-001 (50 links Markdown mode < 30s) and SC-002 (10 files / 200 links Repo mode < 2min) using WebApplicationFactory with mocked HTTP responses and Stopwatch assertions in MarkDownLinkCheck.Tests/Integration/Endpoints/LinkCheckSsePerformanceTests.cs
 
 ---
 
@@ -189,8 +203,10 @@
 - **Phase 3 Tests**: T017–T022 全部可平行
 - **Phase 3 Impl**: T023, T024 可平行
 - **Phase 4 Tests**: T034 獨立
-- **Phase 6**: T046, T047 可平行；T050 獨立
-- **Phase 7**: T051, T052, T053 可平行
+- **Phase 5 Tests**: T041a 獨立
+- **Phase 6 Tests**: T045a, T045b 可平行
+- **Phase 6 Impl**: T046, T047 可平行；T050 獨立
+- **Phase 7**: T051, T052, T053, T055a 可平行
 
 ---
 

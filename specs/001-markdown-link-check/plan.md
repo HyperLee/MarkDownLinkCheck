@@ -15,10 +15,10 @@
 **Primary Dependencies**: ASP.NET Core 10.0、Bootstrap 5、jQuery 3.x、jQuery Validation、Serilog  
 **Storage**: N/A（C# 靜態資料集合，無資料庫）  
 **Testing**: xUnit + Moq（單元測試）+ WebApplicationFactory（整合測試）  
-**Target Platform**: 桌面瀏覽器（Chrome、Edge、Firefox、Safari）  
+**Target Platform**: 桌面瀏覽器（Chrome、Edge、Firefox、Safari）；Bootstrap 5 RWD 支援平板與手機基本瀏覽  
 **Project Type**: Web（單一 Razor Pages 專案）  
 **Performance Goals**: FCP < 1.5 秒、LCP < 2.5 秒；50 連結 Markdown 檢測 < 30 秒；200 連結 Repo 檢測 < 2 分鐘  
-**Constraints**: 僅桌面瀏覽器、不需行動裝置適配、不使用任何資料庫軟體與架構  
+**Constraints**: 以桌面瀏覽器為主要目標，透過 Bootstrap 5 Grid 提供基本行動裝置適配（不做行動裝置專屬最佳化）；不使用任何資料庫軟體與架構  
 **Scale/Scope**: 單一使用者並行操作、單 Repo 最多 500 個 .md 檔案、單次最多 5,000 個連結
 
 ## Constitution Check
@@ -29,7 +29,7 @@
 |------|------|------|
 | I. 程式碼品質至上 | ✅ PASS | C# 14 最新功能、檔案範圍命名空間、模式匹配、null 安全性；所有公開 API 附 XML 文件註解；遵循 `.editorconfig` 格式規範 |
 | II. 測試優先開發 | ✅ PASS | 採用 xUnit + Moq 單元測試 + WebApplicationFactory 整合測試；關鍵路徑（Markdown 解析、連結驗證、報告產生）100% 測試覆蓋；Mock 隔離 HTTP 呼叫 |
-| III. 使用者體驗一致性 | ✅ PASS | Bootstrap 5 元件統一設計語言；SSE 即時進度回饋；清晰錯誤訊息含 HTTP 狀態碼說明；jQuery Validation 即時驗證 |
+| III. 使用者體驗一致性 | ✅ PASS | Bootstrap 5 元件統一設計語言（含 Grid 回應式佈局，符合多裝置瀏覽需求）；SSE 即時進度回饋；清晰錯誤訊息含 HTTP 狀態碼說明；jQuery Validation 即時驗證 |
 | IV. 效能與延展性 | ✅ PASS | FCP < 1.5s / LCP < 2.5s；並行 HTTP 驗證（最多 20 並行）；`IHttpClientFactory` 管理 HttpClient；async/await 全程非同步 |
 | V. 可觀察性與監控 | ✅ PASS | Serilog 結構化日誌；正確日誌層級使用；連結檢測事件記錄 |
 | VI. 安全優先 | ✅ PASS | SSRF 防護（阻擋私有 IP）；輸入驗證（字數上限、URL 格式）；Razor 引擎 HTML 編碼；Anti-Forgery Token；HTTPS + HSTS |
@@ -63,6 +63,9 @@ MarkDownLinkCheck/
 │   ├── Link.cs                         # 連結模型
 │   ├── LinkResult.cs                   # 連結檢測結果模型
 │   ├── CheckReport.cs                  # 檢測報告模型
+│   ├── CheckMode.cs                    # 檢測模式列舉
+│   ├── CheckProgress.cs               # SSE 進度事件模型
+│   ├── LinkCheckOptions.cs             # 檢測設定模型
 │   ├── LinkType.cs                     # 連結類型列舉
 │   └── LinkStatus.cs                   # 連結狀態列舉
 ├── Services/
