@@ -1,6 +1,7 @@
-using MarkDownLinkCheck.Models;
+﻿using MarkDownLinkCheck.Models;
 using MarkDownLinkCheck.Services;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Http;
 using System.ComponentModel.DataAnnotations;
 
@@ -75,7 +76,8 @@ public static class LinkCheckSseEndpoint
 
         var jsonOptions = new JsonSerializerOptions
         {
-            PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+            PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+            Converters = { new JsonStringEnumConverter() }
         };
 
         try

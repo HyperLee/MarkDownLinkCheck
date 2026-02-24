@@ -169,33 +169,41 @@ async function startCheck(payload) {
 
 function parseSSE(buffer) {
     const events = [];
-    const lines = buffer.split('\n');
-    let remaining = '';
-    let currentEvent = { type: '', data: '' };
 
-    for (let i = 0; i < lines.length; i++) {
-        const line = lines[i];
+    // SSE 協議以空白行（\n\n）分隔各個事件。
+    // 以 \n\n 切割，確保只處理完整的事件區塊；
+    // 最後一段（尚未出現 \n\n）作為不完整片段保留，
+    // 以應對大型 JSON 酬載跨越多個 TCP chunk 的情況。
+    const parts = buffer.split(/\r?\n\r?\n/);
 
-        if (line.startsWith('event:')) {
-            currentEvent.type = line.substring(6).trim();
-        } else if (line.startsWith('data:')) {
-            currentEvent.data += line.substring(5).trim();
-        } else if (line === '') {
-            // Event complete
-            if (currentEvent.type && currentEvent.data) {
-                try {
-                    events.push({
-                        type: currentEvent.type,
-                        data: JSON.parse(currentEvent.data)
-                    });
-                } catch (e) {
-                    console.error('Failed to parse SSE data:', currentEvent.data, e);
-                }
+    // pop() 取出最後一段（可能是空字串或不完整的事件片段）
+    const remaining = parts.pop() ?? '';
+
+    for (const block of parts) {
+        const trimmedBlock = block.trim();
+        if (!trimmedBlock) continue;
+
+        const lines = trimmedBlock.split(/\r?\n/);
+        let type = '';
+        let data = '';
+
+        for (const line of lines) {
+            if (line.startsWith('event:')) {
+                type = line.substring(6).trim();
+            } else if (line.startsWith('data:')) {
+                data += line.substring(5).trim();
             }
-            currentEvent = { type: '', data: '' };
-        } else if (i === lines.length - 1) {
-            // Last line (incomplete)
-            remaining = line;
+        }
+
+        if (type && data) {
+            try {
+                events.push({
+                    type,
+                    data: JSON.parse(data)
+                });
+            } catch (e) {
+                console.error('Failed to parse SSE data:', data, e);
+            }
         }
     }
 
